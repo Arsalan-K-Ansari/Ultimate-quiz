@@ -77,16 +77,18 @@ function setStatusClass(element, correct) {
     element.classList.add("correct");
     score += 5;
     scoreBoard.textContent = "Score:" + score;
-    initSecond == 0;
+
     timer.textContent = "Timer" + initSecond;
   } else {
     element.classList.add("wrong");
-    score -= 0;
+
+    score += 0;
     scoreBoard.textContent = "Score:" + score;
     initSecond -= 2.5;
     timer.textContent = "Timer:" + initSecond;
   }
 }
+
 // function setStatusClass1(element, wrong) {
 //   clearStatusClass(element);
 //   if (wrong) {
@@ -126,12 +128,66 @@ function timerFunction() {
     ) {
       timer.innerHTML = "Time is up";
       timerDone = true;
-      return setTimeout(endGame, 1000);
+      return setTimeout(finishGame, 1000);
     }
   }
 }
 
-function endGame() {}
+function finishGame() {
+  questionContainerElement.classList.add("hide");
+  nextButton.classList.add("hide");
+
+  var afterGame = document.createElement("h1");
+  afterGame.textContent = "Enter your initials to save your score!";
+  document.getElementById("container").appendChild(afterGame);
+
+  var form = document.createElement("form");
+  form.id = "form";
+  document.getElementById("score").appendChild(form);
+
+  var initialHolder = document.createElement("Label");
+  initialHolder.setAttribute("for", "initialBox");
+  initialHolder.id = "initialHolder";
+  document.getElementById("form").appendChild(initialHolder);
+
+  var nameBox = document.createElement("INPUT");
+  nameBox.setAttribute("type", "text");
+  nameBox.setAttribute("placeholder", "Initials");
+  nameBox.id = "initialinput";
+  document.getElementById("initialHolder").after(nameBox);
+
+  var submit = document.createElement("input");
+  submit.setAttribute("type", "submit");
+  submit.setAttribute("value", "Save Score");
+  submit.id = "submit";
+  document.getElementById("initialinput").after(submit);
+
+  document.getElementById("submit").addEventListener("click", function (event) {
+    event.preventDefault();
+    var initials = document.querySelector("#initialinput").value;
+    localStorage.setItem("player initials", initials);
+    localStorage.setItem("scores", score);
+    saveScore();
+  });
+}
+function saveScore() {
+  var userName = localStorage.getItem("player initials");
+  var scoreAmount = localStorage.getItem("scores");
+
+  var highScores = {
+    initials: userName,
+    scores: scoreAmount,
+  };
+  var scoreList = new Array();
+  scoreList.push(highScores);
+  return;
+}
+
+// function displayHighScores() {
+//   var afterGame = document.createElement("h1");
+//   afterGame.textContent = "Enter your initials to save your score!";
+//   document.getElementById("container").appendChild(afterGame);
+// }
 
 const questions = [
   {
