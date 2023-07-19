@@ -183,12 +183,25 @@ function saveScore() {
   return;
 }
 
-// function displayHighScores() {
-//   var afterGame = document.createElement("h1");
-//   afterGame.textContent = "Enter your initials to save your score!";
-//   document.getElementById("container").appendChild(afterGame);
-// }
+document
+  .getElementById("HighScores")
+  .addEventListener("click", displayHighScores);
 
+function displayHighScores() {
+  startButton.classList.add("hide");
+  title.classList.add("hide");
+  words.classList.add("hide");
+  afterGame.classList.add("hide");
+  for (var i = 0; i < scoreList.length; i++) {
+    var showScoresElement = document.createElement("p");
+    var uniqueIDvalue = "entry" + i;
+    showScoresElement.id = uniqueIDvalue;
+    showScoresElement.innerText =
+      "Initials:" + scoreList[i].initials + " Score:" + scoreList[i].scores;
+    document.getElementById("container").appendChild(showScores);
+  }
+  return;
+}
 const questions = [
   {
     question: "Inside which HTML element do we put our JavaScript?",
