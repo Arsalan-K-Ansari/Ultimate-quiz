@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ultimate Quiz</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./script.js">
-</head>
-<body>
-    
-</body>
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./style.css" />
+   <script defer src="script.js"></script>
+  </head>
+  <header>
+    <button type="button" id="HighScores">View HighScores</button>
+  </header>
+  <body>
+    <div id="score"></div>
+    <div id="timer"></div>
+    <h1 id="1">Welcome to the Ultimate Quiz!</h1>
+    <p id="2">Are you ready to test your coding skills in this ultimate test?</p>
+    <div class="container">
+        <div id="question-container" class="hide">
+          <div id="question">Question</div>
+          <div id="answer-buttons" class="btn-grid">
+            <button class="btn">Answer 1</button>
+            <button class="btn">Answer 2</button>
+            <button class="btn">Answer 3</button>
+            <button class="btn">Answer 4</button>
+          </div>
+        </div>
+
+
+    <button id="Start" class="Start">Start Quiz</button>
+    <button id="next" class="next, hide">Next</button>
+  </body>
 </html>
