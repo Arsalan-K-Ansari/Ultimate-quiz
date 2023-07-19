@@ -2,6 +2,8 @@ const startButton = document.getElementById("Start");
 const nextButton = document.getElementById("next");
 const title = document.getElementById("1");
 const words = document.getElementById("2");
+const scoreBoard = document.getElementById("score");
+const timer = document.getElementById("timer");
 const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
@@ -21,7 +23,10 @@ function startGame() {
   shuffledQuestions = questions.sort(() => Math.random() - 0.5);
   currentQuestionIndex = 0;
   questionContainerElement.classList.remove("hide");
+  scoreBoard.classList.remove("hide");
+  timer.classList.remove("hide");
   setNextQuestion();
+  timerFunction();
 }
 
 function setNextQuestion() {
@@ -50,7 +55,7 @@ function resetState() {
     answerButtonsElement.removeChild(answerButtonsElement.firstChild);
   }
 }
-
+var score = 0;
 function selectAnswer(e) {
   const selectedButton = e.target;
   const correct = selectedButton.dataset.correct;
@@ -70,15 +75,63 @@ function setStatusClass(element, correct) {
   clearStatusClass(element);
   if (correct) {
     element.classList.add("correct");
+    score += 5;
+    scoreBoard.textContent = "Score:" + score;
+    initSecond == 0;
+    timer.textContent = "Timer" + initSecond;
   } else {
     element.classList.add("wrong");
+    score -= 0;
+    scoreBoard.textContent = "Score:" + score;
+    initSecond -= 2.5;
+    timer.textContent = "Timer:" + initSecond;
   }
 }
+// function setStatusClass1(element, wrong) {
+//   clearStatusClass(element);
+//   if (wrong) {
+//     element.classList.add("wrong");
+
+//     initSecond -= 5;
+//     timer.textContent = "Timer" + initSecond;
+//   }
+// } else {
+//   element.classList.add("wrong");
+//   score -= 0;
+//   scoreBoard.textContent = "Score:" + score;
+//   initSecond -= 2.5;
+//   timer.textContent = "Timer:" + initSecond;
+// }
+// }
 
 function clearStatusClass(element) {
   element.classList.remove("correct");
   element.classList.remove("wrong");
 }
+
+var initSecond = 100;
+var questionCount = 0;
+var timerDone = false;
+
+function timerFunction() {
+  var initTime = setInterval(startTime, 1000);
+  function startTime() {
+    if (initSecond > 0) {
+      initSecond--;
+      return (timer.innerHTML = "Timer:" + initSecond);
+    } else if (
+      initSecond <= 0 &&
+      questionCount < questions.length &&
+      timerDone === false
+    ) {
+      timer.innerHTML = "Time is up";
+      timerDone = true;
+      return setTimeout(endGame, 1000);
+    }
+  }
+}
+
+function endGame() {}
 
 const questions = [
   {
